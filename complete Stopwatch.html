@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* START STOPWATCH CSS */
+        body {
+            background-color: darkslategrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .txt {
+            font-weight: bold;
+            font-size: 150px;
+        }
+
+        #abc {
+            font-size: 50px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        #button-container {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .btn {
+            margin: 5px 25px;
+            font-size: 30px;
+            font-weight: bold;
+            padding: 7px 30px;
+            border-radius: 5px;
+            border: 0px;
+            cursor: pointer;
+            box-shadow: 2px 5px;
+        }
+
+        #start {
+            background-color: rgb(92, 158, 92);
+        }
+
+        #start:hover {
+            background-color: rgb(5, 31, 5);
+        }
+
+        #stop {
+            background-color: rgb(24, 105, 133);
+        }
+
+        #stop:hover {
+            background-color: darkblue;
+        }
+
+        #reset {
+            background-color: rgb(121, 32, 44);
+        }
+
+        #reset:hover {
+            background-color: rgb(185, 13, 13);
+        }
+
+        /* END STOPWATCH CSS */
+    </style>
+</head>
+
+<body>
+    <!-- START STOPWATCH HTML -->
+    <div id="container">
+        <div id="timer">
+            <span class="txt" id="hr">00</span>
+            <span id="abc">Hr</span>
+            <span class="txt" id="min">00</span>
+            <span id="abc">Min</span>
+            <span class="txt" id="sec">00</span>
+            <span id="abc">Sec</span>
+            <span class="txt" id="count">00</span>
+        </div>
+        <div id="button-container">
+            <button class="btn" id="start" onclick="start()">Start</button>
+            <button class="btn" id="stop" onclick="stop()">Stop</button>
+            <button class="btn" id="reset" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    <!-- END STOPWATCH HTML -->
+
+
+    <script>
+        //  START STOPWATCH JAVASCRIPT-----
+        var hr = 0;
+        var min = 0;
+        var sec = 0;
+        var count = 0;
+
+        var timer = false;
+
+        function start() {
+            if (timer == false) {
+                timer = true;
+                stopwatch();
+            }
+        }
+
+        function stop() {
+            if (timer == true) {
+                timer = false;
+            }
+        }
+
+        function reset() {
+            timer = false;
+
+            hr = 0;
+            min = 0;
+            sec = 0;
+            count = 0;
+
+            document.getElementById('hr').innerHTML = 00;
+            document.getElementById('min').innerHTML = 00;
+            document.getElementById('sec').innerHTML = 00;
+            document.getElementById('count').innerHTML = 00;
+        }
+
+        function stopwatch() {
+            if (timer == true) {
+                count = count + 1;
+
+                if (count == 100) {
+                    sec = sec + 1;
+                    count = 0;
+                }
+
+                if (sec == 60) {
+                    min = min + 1;
+                    sec = 0;
+                }
+
+                if (min == 60) {
+                    hr = hr + 1;
+                    min = 0;
+                    sec = 0;
+                }
+
+                var hrString = hr;
+                var minString = min;
+                var secString = sec;
+                var countString = count;
+
+                if (hr < 10) {
+                    hrString = '0' + hrString;
+                }
+                if (min < 10) {
+                    minString = '0' + minString;
+                }
+                if (sec < 10) {
+                    secString = '0' + secString;
+                }
+                if (count < 10) {
+                    countString = '0' + countString
+                }
+
+                document.getElementById('hr').innerHTML = hrString;
+                document.getElementById('min').innerHTML = minString;
+                document.getElementById('sec').innerHTML = secString;
+                document.getElementById('count').innerHTML = countString;
+
+                setTimeout('stopwatch()', 10);
+            }
+        }
+
+        // END STOPWATCH JAVASCRIPT-------
+    </script>
+</body>
+
+</html>
